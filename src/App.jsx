@@ -12,34 +12,45 @@ const initialItems = [
 
 function App() {
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(initialItems);
 
-  const handleAddItems = (item) =>{
+  const handleAddItems = (item) => {
     setItems([
       ...items,
       item,
     ])
     
     // items.push(newItem)
-  }
+  };
 
   const handleDeleteItem = (id) => {
     // filter out the id that matches the object id
-    setItems( item => items.filter(item => item.id !== id))
-  }
+    setItems( items.filter((item) => item.id !== id));
+  };
+
+  const handleToggleItem = (id) => {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  };
 
 
   return (
     <div className='app'>
       <Logo />
       <Form onAddItems={handleAddItems}/>
-      <PackingList initialItems={initialItems} 
+      <PackingList 
+      // initialItems={initialItems} 
       items={items}
+      onDeleteItem={handleDeleteItem}
+      onToggle={handleToggleItem}
       
       />
-      <Stats />
+      <Stats items={items} />
     </div>
-  )
+  );
 }
 
 export default App

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useState } from "react";
 
 function Form({onAddItems}) {
 
-    const [description, setDescription] = useState('')
-    const [quantity, setQuantity] = useState(1)
+    const [description, setDescription] = useState('');
+    const [quantity, setQuantity] = useState(1);
 
     const handleSubmit = (e) => {
-        console.log(e)
+        console.log(e);
         e.preventDefault();
 
         if(!description) return;
@@ -17,13 +16,13 @@ function Form({onAddItems}) {
             quantity,
             description,
             packed: false,
-        }
+        };
 
-        console.log(newItem)
-        onAddItems(newItem)
-        setDescription('')
-        setQuantity(1)
-    }
+        console.log(newItem);
+        onAddItems(newItem);
+        setDescription('');
+        setQuantity(1);
+    };
 
     const handleChange = (e) => {
         // console.log(e.target.value)
